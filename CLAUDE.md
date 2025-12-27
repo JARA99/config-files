@@ -2,6 +2,21 @@
 
 This repository contains my personal dotfiles managed with GNU Stow.
 
+## IMPORTANT: AI Assistant Limitations
+
+**Claude CANNOT perform git operations that require SSH authentication.**
+
+- **DO NOT** attempt to `git push` or `git pull` on repositories with SSH remotes
+- **DO NOT** attempt to push/pull the nvim submodule (uses SSH: git@github.com:JARA99/nvim-config.git)
+- **INSTEAD**: Inform the user and ask them to run the git commands themselves
+- You CAN: make commits, stage files, and prepare changes for the user to push
+- You CAN: read git status, logs, and diffs
+
+When the user requests changes that need to be pushed:
+1. Make the changes and commit them locally
+2. Tell the user: "I've committed the changes. Please run `git push` to push to the remote."
+3. Provide the exact commands they need to run
+
 ## Repository Structure
 
 - `.config/nvim/` - Neovim configuration (git submodule from https://github.com/JARA99/nvim-config)
