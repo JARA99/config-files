@@ -2,20 +2,21 @@
 
 This repository contains my personal dotfiles managed with GNU Stow.
 
-## IMPORTANT: AI Assistant Limitations
+## Git and SSH Conventions
 
-**Claude CANNOT perform git operations that require SSH authentication.**
+The dotfiles remote uses SSH: `git@github.com:JARA99/config-files.git`. SSH operations
+work via the agent-forwarding chain (laptop → hostinger → downstream VPSes):
 
-- **DO NOT** attempt to `git push` or `git pull` on repositories with SSH remotes
-- The dotfiles remote uses SSH: `git@github.com:JARA99/config-files.git`
-- **INSTEAD**: Inform the user and ask them to run the git commands themselves
-- You CAN: make commits, stage files, and prepare changes for the user to push
-- You CAN: read git status, logs, and diffs
+- `git push` / `git pull` / `git clone` from hostinger work directly — the GitHub key lives
+  in hostinger's local agent. No password prompt.
+- When SSHing to other hosts that need GitHub access (e.g. cloning the dotfiles on a VPS),
+  use `ssh -A` to keep the forwarded agent reachable. The `~/.ssh/config` entry for
+  `contabo_dev` and similar hosts uses `IdentityAgent ~/.ssh/forwarded-agent.sock` so the
+  laptop's keys propagate all the way down.
 
-When the user requests changes that need to be pushed:
-1. Make the changes and commit them locally
-2. Tell the user: "I've committed the changes. Please run `git push` to push to the remote."
-3. Provide the exact commands they need to run
+Even though auth works, pushing changes shared GitHub state. Default behavior: commit
+locally, then **ask before `git push`** unless the user has clearly authorized it for the
+current task.
 
 ## Repository Structure
 
