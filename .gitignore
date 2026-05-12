@@ -1,0 +1,2 @@
+# TPM-installed tmux plugins (reinstalled per-machine via `prefix + I`)
+.config/tmux/plugins/
