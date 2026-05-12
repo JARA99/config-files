@@ -7,7 +7,7 @@ This repository contains my personal dotfiles managed with GNU Stow.
 **Claude CANNOT perform git operations that require SSH authentication.**
 
 - **DO NOT** attempt to `git push` or `git pull` on repositories with SSH remotes
-- **DO NOT** attempt to push/pull the nvim submodule (uses SSH: git@github.com:JARA99/nvim-config.git)
+- The dotfiles remote uses SSH: `git@github.com:JARA99/config-files.git`
 - **INSTEAD**: Inform the user and ask them to run the git commands themselves
 - You CAN: make commits, stage files, and prepare changes for the user to push
 - You CAN: read git status, logs, and diffs
@@ -19,7 +19,7 @@ When the user requests changes that need to be pushed:
 
 ## Repository Structure
 
-- `.config/nvim/` - Neovim configuration (git submodule from https://github.com/JARA99/nvim-config)
+- `.config/nvim/` - Neovim configuration (kickstart.nvim base, custom tweaks under `lua/custom/`)
 - `.config/tmux/tmux.conf` - Tmux configuration with:
   - Seamless nvim-tmux navigation using nvim-tmux-navigation plugin
   - Vi-style copy mode keybindings
@@ -44,14 +44,6 @@ stow .
 ```bash
 cd ~/.dotfiles
 stow -D .
-```
-
-### Updating the nvim submodule
-```bash
-cd ~/.dotfiles
-git submodule update --remote .config/nvim
-git add .config/nvim
-git commit -m "Update nvim submodule"
 ```
 
 ## When Adding New Configurations
@@ -90,30 +82,6 @@ git commit -m "Update tmux configuration: <description>"
 git push
 ```
 
-## Nvim Configuration (Submodule)
-
-The nvim configuration is a separate git repository. To make changes:
-
-1. Navigate to the submodule:
-   ```bash
-   cd ~/.dotfiles/.config/nvim
-   ```
-
-2. Make your changes and commit:
-   ```bash
-   git add .
-   git commit -m "Description of changes"
-   git push
-   ```
-
-3. Update the parent repository to track the new commit:
-   ```bash
-   cd ~/.dotfiles
-   git add .config/nvim
-   git commit -m "Update nvim submodule"
-   git push
-   ```
-
 ## Current Configurations
 
 ### Nvim
@@ -145,13 +113,6 @@ Original configurations are backed up as:
 ```bash
 cd ~/.dotfiles
 stow --restow .
-```
-
-### Submodule not initialized after fresh clone
-```bash
-cd ~/.dotfiles
-git submodule init
-git submodule update
 ```
 
 ### Conflicts when stowing
