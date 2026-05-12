@@ -1,0 +1,4 @@
+# Top-level files that are part of the repo but should not be symlinked into $HOME
+^/CLAUDE\.md$
+^/README\.md$
+^/LICENSE(\..*)?$
